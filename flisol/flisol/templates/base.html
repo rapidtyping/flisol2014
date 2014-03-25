@@ -7,7 +7,7 @@
 	<link href='media/img/icono.png' rel='shortcut icon' type='image/gif'/>
 	<link rel="stylesheet" href="media/css/web.css">
 	<link href='http://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>	
+	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
 	<!--Cuenta regresiva-->
 	<link type="text/css" href="media/js/jquery.countdown.css" rel="stylesheet" />
 	<script type="text/javascript" src="media/js/ext/jquery-1.7.2.min.js"></script>
@@ -55,7 +55,7 @@
 	var ticket = {
 		open: function(){
 			$('#form-ticket').slideDown('slow');
-			$('#CerrarBusqueda').css('display','block');			
+			$('#CerrarBusqueda').css('display','block');
 		},
 		close: function(){
 			$('#form-ticket').slideDown('slow');
@@ -78,21 +78,21 @@
 			</div>
 				<div id="menutop">
 					<div id="reloj">
-						<center>	
+						<center>
 							<div id="falta">Faltan:</div>
 							<section>
-							<!--Cuenta Regresiva-->		
+							<!--Cuenta Regresiva-->
 							<div id="defaultCountdown2">
 							</div>
 							</section>
-				 			<!--fin cuenta regresiva--> 
+				 			<!--fin cuenta regresiva-->
 				 			<a href="#fondobanner"><img src="media/img/ico-inicio.png" /></a>
 				 		</center>
 					</div>
 				</div>
-			
+
 		<script type="text/javascript" src="media/js/scrolltop.js"></script>
-		</header>		
+		</header>
 	</div>
 	<div id="fondobanner">
 	<div id="banner">
@@ -101,7 +101,7 @@
 	</div>
 
 	<div id="info">
-<!--Neuvo Menu-->	
+<!--Neuvo Menu-->
 			<div id="menu1">
 			<nav>
 				<ul>
@@ -112,16 +112,16 @@
 				</ul>
 			</nav></div>
 
-	<div id="info-izquierda">	
+	<div id="info-izquierda">
 		<hgroup><h1>Sábado 26 de Abril</h1></hgroup>
 		<hgroup><div class="lema"><h3>
 			"Ahora en Tacna se vive el software libre"
 		</h3></div></hgroup>
-		<?php 
+		<?php
 			$total = query("SELECT MAX(id) AS total FROM inscriptos");
 			$disponible = 300 - (int)$total['total'];
 		?>
-	
+
 		<div id="total">
 			<h4><?php echo $disponible;?><span>Entradas disponibles</span></h4>
 		</div>
@@ -138,7 +138,7 @@
 			<a href="https://www.youtube.com/user/FlisolTacnaPeru" target="_blank"><img src="media/img/youtube-icon.png"></a>
 			<a href="https://plus.google.com/u/0/111966957349242981203" target="_blank"><img src="media/img/google-icon.png"></a>
 		</div>
-	</div>	
+	</div>
 	<!--<div id="info-centro">
 	</div>-->
 	<div id="info-derecha">
@@ -150,10 +150,10 @@
 	<div id="ticket">
 		<p>
 			<span style="color: #ffb532;">(*) </span>
-			<span>¿Perdiste tu Ticket?</span>, entonces haz click en el siguiente 
-			<a href="javascript:ticket.open()">enlace.</a> 
+			<span>¿Perdiste tu Ticket?</span>, entonces haz click en el siguiente
+			<a href="javascript:ticket.open()">enlace.</a>
 		</p>
-	</div>	
+	</div>
 	</div>
 
 	<div id="contenedor">
@@ -173,23 +173,74 @@
 		</div>
 
 	<!--FORMULARIO-->
-		<div id="formulario"> 
+		<div id="formulario">
 		<form action="." method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<fieldset>
+			<div class="clearfix">
+				{{ form.subject.errors}}
+				<label for="id_nombres" >Nombres</label>
+				{{ form.nombres }}
+			</div>
+			<div class="clearfix">
+				{{ form.subject.errors}}
+				<label for="id_apellidos" >Apellidos</label>
+				{{ form.apellidos}}
+			</div>
+			<div class="clearfix">
+				{{ form.subject.errors}}
+				<label for="id_dni" >DNI</label>
+				<input id="id_dni" type="text" name="dni" size="27" pattern="\d{8}" maxlength="8" required="" value="">
+			</div>
+			<div class="clearfix">
+				{{ form.subject.errors}}
+				<label for="id_email" >Email</label>
+				<input id="id_email" type="email" name="email" size="27" required="" value="">
+			</div>
+			<div class="clearfix">
+				{{ form.subject.errors}}
+				<label for="id_telefono" >Teléfono</label>
+				<input id="id_telefono" type="text" name="fono" size="27" pattern="\+?\d{9,13}" required="" value="">
+			</div>
+			<div class="clearfix">
+				{{ form.subject.errors}}
+				<label for="id_organizacion">Organización/C. Estudio/Empresa</label>
+				<input id="id_organizacion" type="text" name="organizacion" size="27" required="" value="">
+			</div>
+			<div class="certificado">
+				{{ form.subject.errors}}
+				<label for="id_certificado">Certificado: (S/. 20)</label>
+				<label><input id="id_certificado" type="radio" name="certificado" value="SI"> Sí</label>
+				<label><input type="radio" name="certificado" value="NO" checked=""> No</label>
+			</div>
+			<div class="certificado">
+				{{ form.subject.errors}}
+				<label for="id_certificado">Certificado: (S/. 20)</label>
+				{{ form.certificado }}
+			</div>
+			<div id="certificado">
+			<label>Certificado: (S/. 20)</label>
+			<label><input type="radio" name="certificado" value="SI"> Sí</label>
+			<label><input type="radio" name="certificado" value="NO" checked=""> No</label>
+			</div>
+			<input type="submit" name="mysubmit" id="mysubmit" value="Realizar Inscripción">
+		</fieldset>
+
 		<fieldset>
 			{% csrf_token %}
 			{{ form.as_p }}
 			<input type="submit" name="mysubmit" id="mysubmit" value="Realizar Inscripción"/>
 			<button type="reset" class="btn btn-small btn-primary">Limpiar</button>
-			
-		</fieldset>	
-		<!-- RESULTADO--> 
+
+		</fieldset>
+		<!-- RESULTADO-->
 			<div id="result"></div>
 		</form>
 		</div>
 	<!-- FIN FORMULARIO-->
 		<div class="cinta"></div>
 		<div id="evento">
-			<?php 
+			<?php
 				$publicacion = @query('SELECT * FROM publicaciones WHERE titulo = "SOBRE FLISOL"');
 			?>
 			<section>
@@ -217,7 +268,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="cinta2"></div>
 <div id="datosevento">
 			<div id="lugar">
@@ -252,36 +303,36 @@
 					<a href="#"><img src="media/img/Patrocinan/coyotex.png" /></a>
 					<a href="#"><img src="media/img/Patrocinan/SUPER_STEREO.png" width="170px"/></a>
 					<a href="#"><img src="media/img/Patrocinan/idw.png" width="170px"/></a>
-				</div> 
+				</div>
 		</div>
 		<footer>
 			<img src="media/img/pie1.png">
 			<img src="media/img/pie2.png">
 			<p>
-				El contenido de la web está bajo la licencia GPL. 
+				El contenido de la web está bajo la licencia GPL.
 				El código fuente de esta página está disponible en <a href="https://github.com/flisoltacna" target="_blank">GitHub</a> bajo la GNU Public License 3.0.
 			</p>
-		</footer>	
+		</footer>
 	</div>
 
 <?php if(isset($error) and $error == 6):?>
 	<script type="text/javascript">
-		alert("Ud. ya se encuentra registrado!");	
+		alert("Ud. ya se encuentra registrado!");
 	</script>
 <?php endif;?>
 
 <?php if(isset($errorticket) and $errorticket == 8):?>
 	<script type="text/javascript">
-		alert("Ud. no se encuentra registrado!");	
+		alert("Ud. no se encuentra registrado!");
 	</script>
 <?php endif;?>
 
 <script type="text/javascript">
-	$.getJSON("http://picasaweb.google.com/data/feed/base/user/111966957349242981203/albumid/5855518971056638033?alt=json&kind=photo&hl=en_US&max-results=8&fields=entry(title,gphoto:numphotos,media:group(media:content,media:thumbnail),link)", 
+	$.getJSON("http://picasaweb.google.com/data/feed/base/user/111966957349242981203/albumid/5855518971056638033?alt=json&kind=photo&hl=en_US&max-results=8&fields=entry(title,gphoto:numphotos,media:group(media:content,media:thumbnail),link)",
 			function(data) {
 			$.each(data.feed.entry, function(i,item){
 		            $("<img/>").attr("src", item.media$group.media$thumbnail[2].url).appendTo("#picasa");
-		      });	
+		      });
 		});
 </script>
 
