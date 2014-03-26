@@ -211,27 +211,11 @@
 			<div class="certificado">
 				{{ form.subject.errors}}
 				<label for="id_certificado">Certificado: (S/. 20)</label>
-				<label><input id="id_certificado" type="radio" name="certificado" value="SI"> Sí</label>
-				<label><input type="radio" name="certificado" value="NO" checked=""> No</label>
-			</div>
-			<div class="certificado">
-				{{ form.subject.errors}}
-				<label for="id_certificado">Certificado: (S/. 20)</label>
 				{{ form.certificado }}
 			</div>
-			<div id="certificado">
-			<label>Certificado: (S/. 20)</label>
-			<label><input type="radio" name="certificado" value="SI"> Sí</label>
-			<label><input type="radio" name="certificado" value="NO" checked=""> No</label>
-			</div>
 			<input type="submit" name="mysubmit" id="mysubmit" value="Realizar Inscripción">
-		</fieldset>
-		<fieldset>
-			{{ form.as_p }}
-			<input type="submit" name="mysubmit" id="mysubmit" value="Realizar Inscripción"/>
 			<button type="reset" class="btn btn-small btn-primary">Limpiar</button>
-			
-		</fieldset>	
+		</fieldset>
 		<!-- RESULTADO--> 
 			<div id="result"></div>
 		</form>
